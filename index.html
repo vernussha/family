@@ -15,7 +15,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131');
+            background-image: url('background.png');
             background-size: cover;
             background-blend-mode: overlay;
         }
@@ -85,9 +85,10 @@
             margin-top: 30px;
             text-align: center;
         }
-        video {
+        iframe {
             width: 100%;
             max-width: 600px;
+            height: 337px;
             border-radius: 12px;
         }
     </style>
@@ -122,15 +123,12 @@
         <div id="message" class="message"></div>
         <div class="video-container" id="videoContainer">
             <p>Код принят. Смотрите сообщение от Лины:</p>
-            <video id="secretVideo" controls>
-                <source src="video.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
+            <iframe src="https://drive.google.com/file/d/1CLkgRTCOtxyAuk5RFg9BVvQoIzWOlBXP/view?usp=sharing" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        const correctAnswers = ["ермаков", "ковтун", "рогов", "серов", "елисеева"];
+        const correctAnswers = ["туманова", "ковтун", "рогов", "серов", "елисеева"];
 
         document.getElementById("codeForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -144,17 +142,13 @@
 
             const messageDiv = document.getElementById("message");
             const videoContainer = document.getElementById("videoContainer");
-            const video = document.getElementById("secretVideo");
 
             if (JSON.stringify(inputs) === JSON.stringify(correctAnswers)) {
                 messageDiv.innerHTML = `<span class="activated">Код принят.</span>`;
                 videoContainer.style.display = "block";
-                video.play();
             } else {
                 messageDiv.textContent = "ОШИБКА. Проверьте ответы.";
                 videoContainer.style.display = "none";
-                video.pause();
-                video.currentTime = 0;
             }
         });
     </script>
