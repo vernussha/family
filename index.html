@@ -2,23 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Проверка Агентов</title>
+  <title>Активация протокола</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Courier New', monospace;
       background: url('background.png') no-repeat center center fixed;
       background-size: cover;
+      font-family: 'Courier New', monospace;
       color: #00ff00;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 50px auto;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ff00;
+      padding: 40px;
     }
 
     .question {
@@ -32,96 +23,81 @@
 
     input[type="text"] {
       width: 100%;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      border-radius: 5px;
+      padding: 8px;
       font-size: 16px;
+      border: 1px solid #00ff00;
+      background-color: #000;
+      color: #00ff00;
     }
 
     button {
-      background-color: transparent;
-      border: 2px solid #00ff00;
-      color: #00ff00;
+      margin-top: 20px;
       padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-
-    button:hover {
       background-color: #00ff00;
       color: black;
-    }
-
-    .error {
-      color: red;
-      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
     }
 
     .video-container {
-      margin-top: 30px;
       display: none;
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ff00;
+      margin-top: 30px;
     }
 
     video {
-      max-height: 80vh
-      width: auto;
+      max-width: 90vw;
+      max-height: 80vh;
       border: 2px solid #00ff00;
       border-radius: 10px;
       background-color: black;
     }
 
-    p {
+    .hidden {
+      display: none;
+    }
+
+    #message {
+      margin-top: 20px;
       font-weight: bold;
-      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <div id="questionsBlock">
     <div class="question">
       <label>1. Кто отказался от миссии в последний момент?</label>
       <input type="text" id="answer1">
     </div>
-
     <div class="question">
       <label>2. Кто работал под прикрытием в Марокко?</label>
       <input type="text" id="answer2">
     </div>
-
     <div class="question">
       <label>3. Кто зашифровал данные в протоколе «Тень»?</label>
       <input type="text" id="answer3">
     </div>
-
     <div class="question">
       <label>4. Кто зафиксирован на перехвате сигнала в точке 4?</label>
       <input type="text" id="answer4">
     </div>
-
     <div class="question">
       <label>5. Кто вернул оборудование без регистрации в базе C.R.I.D.?</label>
       <input type="text" id="answer5">
     </div>
-
     <button onclick="checkAnswers()">Проверить</button>
-    <div id="errorMessage" class="error"></div>
+    <div id="errorMessage" style="color: red;"></div>
+  </div>
 
-    <div class="video-container" id="videoContainer">
-      <p>Код принят. Смотрите сообщение от Лины:</p>
-      <video controls>
-        <source src="https://www.dropbox.com/scl/fi/f9xr2k8gkqi95rec8vaem/.mp4?rlkey=0yr86c54lang6vhg59z70x57p&st=wh0we9j1&raw=1" type="video/mp4">
-        Ваш браузер не поддерживает видео.
-      </video>
-    </div>
+  <div id="message"></div>
+
+  <div class="video-container" id="videoContainer">
+    <video controls autoplay>
+      <source src="https://www.dropbox.com/scl/fi/f9xr2k8gkqi95rec8vaem/.mp4?rlkey=0yr86c54lang6vhg59z70x57p&raw=1" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
   </div>
 
   <script>
@@ -132,19 +108,21 @@
         document.getElementById("answer2").value.trim().toLowerCase(),
         document.getElementById("answer3").value.trim().toLowerCase(),
         document.getElementById("answer4").value.trim().toLowerCase(),
-        document.getElementById("answer5").value.trim().toLowerCase()
+        document.getElementById("answer5").value.trim().toLowerCase(),
       ];
 
-      const allCorrect = inputs.every((input, index) => input === correct[index]);
+      const isCorrect = inputs.every((val, index) => val === correct[index]);
 
-      if (allCorrect) {
-        document.getElementById("videoContainer").style.display = "block";
+      if (isCorrect) {
         document.getElementById("errorMessage").textContent = "";
+        document.getElementById("questionsBlock").classList.add("hidden");
+        document.getElementById("message").innerText = "Код принят. Смотрите сообщение от Лины:";
+        document.getElementById("videoContainer").style.display = "block";
       } else {
-        document.getElementById("videoContainer").style.display = "none";
-        document.getElementById("errorMessage").textContent = "Код неверный. Проверьте ответы.";
+        document.getElementById("errorMessage").textContent = "Неверные ответы. Попробуйте ещё раз.";
       }
     }
   </script>
+
 </body>
 </html>
