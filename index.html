@@ -94,7 +94,7 @@
   <div id="message"></div>
 
   <div class="video-container" id="videoContainer">
-    <video controls autoplay>
+    <video controls id="secretVideo">
       <source src="https://dl.dropboxusercontent.com/scl/fi/f9xr2k8gkqi95rec8vaem/.mp4?rlkey=0yr86c54lang6vhg59z70x57p&raw=1" type="video/mp4">
       Ваш браузер не поддерживает видео.
     </video>
@@ -118,6 +118,10 @@
         document.getElementById("questionsBlock").classList.add("hidden");
         document.getElementById("message").innerText = "Код принят. Смотрите сообщение от Лины:";
         document.getElementById("videoContainer").style.display = "block";
+
+        const video = document.getElementById("secretVideo");
+        video.play();
+      }
       } else {
         document.getElementById("errorMessage").textContent = "Неверные ответы. Попробуйте ещё раз.";
       }
