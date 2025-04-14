@@ -121,36 +121,41 @@
             <input type="submit" value="Отправить">
         </form>
         <div id="message" class="message"></div>
-        <div class="video-container" id="videoContainer">
-            <p>Код принят. Смотрите сообщение от Лины:</p>
-            <iframe src="https://drive.google.com/file/d/1CLkgRTCOtxyAuk5RFg9BVvQoIzWOlBXP/view?usp=sharing" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
+      <div class="video-container" id="videoContainer">
+  <p>Код принят. Смотрите сообщение от Лины:</p>
+  <video id="secretVideo" controls>
+    <source src="https://drive.google.com/file/d/1CLkgRTCOtxyAuk5RFg9BVvQoIzWOlBXP/view?usp=sharing" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+</div>
 
-    <script>
-        const correctAnswers = ["туманова", "ковтун", "рогов", "серов", "елисеева"];
+<script>
+  function checkAnswers() {
+    const correctAnswers = ["туманова", "ковтун", "рогов", "серов", "елисеева"];
+    const inputs = [
+      document.getElementById("answer1").value.trim().toLowerCase(),
+      document.getElementById("answer2").value.trim().toLowerCase(),
+      document.getElementById("answer3").value.trim().toLowerCase(),
+      document.getElementById("answer4").value.trim().toLowerCase(),
+      document.getElementById("answer5").value.trim().toLowerCase(),
+    ];
 
-        document.getElementById("codeForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const inputs = [
-                document.getElementById("answer1").value.trim().toLowerCase(),
-                document.getElementById("answer2").value.trim().toLowerCase(),
-                document.getElementById("answer3").value.trim().toLowerCase(),
-                document.getElementById("answer4").value.trim().toLowerCase(),
-                document.getElementById("answer5").value.trim().toLowerCase(),
-            ];
+    const messageDiv = document.getElementById("message");
+    const videoContainer = document.getElementById("videoContainer");
+    const video = document.getElementById("secretVideo");
 
-            const messageDiv = document.getElementById("message");
-            const videoContainer = document.getElementById("videoContainer");
-
-            if (JSON.stringify(inputs) === JSON.stringify(correctAnswers)) {
-                messageDiv.innerHTML = `<span class="activated">Код принят.</span>`;
-                videoContainer.style.display = "block";
-            } else {
-                messageDiv.textContent = "ОШИБКА. Проверьте ответы.";
-                videoContainer.style.display = "none";
-            }
-        });
+    if (JSON.stringify(inputs) === JSON.stringify(correctAnswers)) {
+      messageDiv.innerHTML = `<span class="activated">Код принят.</span>`;
+      videoContainer.style.display = "block";
+      video.play();
+    } else {
+      messageDiv.textContent = "ОШИБКА. Проверьте ответы.";
+      videoContainer.style.display = "none";
+      video.pause();
+      video.currentTime = 0;
+    }
+  }
+</script>
     </script>
 </body>
 </html>
