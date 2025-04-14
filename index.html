@@ -1,122 +1,98 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Проверка фамилий — C.R.I.D.</title>
+  <meta charset="UTF-8" />
+  <title>Активация кода</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Courier New', monospace;
-      background-color: #0a0a0a;
-      color: #00ff99;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px;
-      background-image: url('background.png');
+      background-image: url('background.PNG');
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-
-    .container {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-      max-width: 700px;
-      width: 100%;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
+      background-position: center;
+      color: limegreen;
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
     }
 
     .question {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
-    .question input {
-      margin-top: 10px;
-      width: 100%;
-      padding: 10px;
+    input[type="text"] {
+      width: 300px;
+      padding: 5px;
       font-size: 16px;
-      border-radius: 6px;
-      border: none;
+      margin-top: 5px;
     }
 
     button {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #00ffcc;
-      color: black;
+      background-color: #00cc99;
+      color: white;
       font-size: 16px;
+      padding: 10px 20px;
       border: none;
-      border-radius: 6px;
       cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
     }
 
     .error {
       color: red;
-      margin-top: 20px;
-      text-align: center;
+      margin-top: 10px;
     }
 
     .video-container {
       display: none;
       margin-top: 30px;
-      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 720px;
     }
 
     video {
       width: 100%;
-      max-width: 600px;
-      border-radius: 12px;
+      border: 2px solid limegreen;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Ответьте на все вопросы</h1>
 
-    <div class="question">
-      <label>1. Кто зашифровал «Альфа-код», спасший операцию в 2019 году?</label>
-      <input type="text" id="answer1">
-    </div>
+  <div class="question">
+    <label>1. Кто отказался от миссии в последний момент?</label><br>
+    <input type="text" id="answer1">
+  </div>
 
-    <div class="question">
-      <label>2. Кто передал координаты точки «Север-4» напрямую, нарушив протокол связи в 2020?</label>
-      <input type="text" id="answer2">
-    </div>
+  <div class="question">
+    <label>2. Кто работал под прикрытием в Марокко?</label><br>
+    <input type="text" id="answer2">
+  </div>
 
-    <div class="question">
-      <label>3. Кто действовал под прикрытием в секторе 8 и вел переговоры?</label>
-      <input type="text" id="answer3">
-    </div>
+  <div class="question">
+    <label>3. Кто зашифровал данные в протоколе «Тень»?</label><br>
+    <input type="text" id="answer3">
+  </div>
 
-    <div class="question">
-      <label>4. Кто зафиксирован на перехвате сигнала в точке 4?</label>
-      <input type="text" id="answer4">
-    </div>
+  <div class="question">
+    <label>4. Кто зафиксирован на перехвате сигнала в точке 4?</label><br>
+    <input type="text" id="answer4">
+  </div>
 
-    <div class="question">
-      <label>5. Кто вернул оборудование без регистрации в базе C.R.I.D.?</label>
-      <input type="text" id="answer5">
-    </div>
+  <div class="question">
+    <label>5. Кто вернул оборудование без регистрации в базе C.R.I.D.?</label><br>
+    <input type="text" id="answer5">
+  </div>
 
-    <button onclick="checkAnswers()">Проверить</button>
-    <div id="errorMessage" class="error"></div>
+  <button onclick="checkAnswers()">Проверить</button>
+  <div id="errorMessage" class="error"></div>
 
-    <div class="video-container" id="videoContainer">
-      <p>Код принят. Смотрите сообщение от Лины:</p>
-      <video controls>
-        <source src="lina_video.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео.
-      </video>
-    </div>
+  <div class="video-container" id="videoContainer">
+    <p>Код принят. Смотрите сообщение от Лины:</p>
+    <video controls>
+      <source src="https://dl.dropboxusercontent.com/scl/fi/f9xr2k8gkqi95rec8vaem/.mp4?rlkey=0yr86c54lang6vhg59z70x57p&st=wh0we9j1" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
   </div>
 
   <script>
@@ -127,20 +103,20 @@
         document.getElementById("answer2").value.trim().toLowerCase(),
         document.getElementById("answer3").value.trim().toLowerCase(),
         document.getElementById("answer4").value.trim().toLowerCase(),
-        document.getElementById("answer5").value.trim().toLowerCase(),
+        document.getElementById("answer5").value.trim().toLowerCase()
       ];
 
-      const errorMsg = document.getElementById("errorMessage");
-      const videoBlock = document.getElementById("videoContainer");
+      const allCorrect = inputs.every((val, index) => val === correct[index]);
 
-      if (JSON.stringify(inputs) === JSON.stringify(correct)) {
-        errorMsg.textContent = "";
-        videoBlock.style.display = "block";
+      if (allCorrect) {
+        document.getElementById("errorMessage").textContent = "";
+        document.getElementById("videoContainer").style.display = "block";
       } else {
-        errorMsg.textContent = "ОШИБКА. Проверьте фамилии и порядок.";
-        videoBlock.style.display = "none";
+        document.getElementById("errorMessage").textContent = "Код неверен. Попробуйте ещё раз.";
+        document.getElementById("videoContainer").style.display = "none";
       }
     }
   </script>
+
 </body>
 </html>
